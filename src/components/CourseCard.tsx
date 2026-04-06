@@ -1,48 +1,51 @@
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Clock, Users, Award } from "lucide-react";
+import { Presentation, Table, PenTool, Shapes, FileText, LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const iconMap: Record<string, LucideIcon> = {
+  presentation: Presentation,
+  table: Table,
+  "pen-tool": PenTool,
+  shapes: Shapes,
+  "file-text": FileText,
+};
 
 interface CourseCardProps {
-  title: string;
-  description: string;
-  duration: string;
-  students: string;
-  level: string;
-  icon: React.ReactNode;
+  name: string;
+  icon: string;
+  description?: string;
+  selected?: boolean;
+  onSelect?: () => void;
+  selectable?: boolean;
 }
 
-export const CourseCard = ({ title, description, duration, students, level, icon }: CourseCardProps) => {
+export const CourseCard = ({ name, icon, description, selected, onSelect, selectable }: CourseCardProps) => {
+  const Icon = iconMap[icon] || FileText;
+
   return (
-    <Card className="group overflow-hidden bg-card border-border hover:shadow-hover transition-all duration-300">
-      <div className="p-6 space-y-4">
-        <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform">
-          {icon}
+    <Card
+      className={cn(
+        "p-6 transition-all duration-200 cursor-default",
+        selectable && "cursor-pointer hover:shadow-hover hover:border-primary/40",
+        selected && "border-primary bg-accent shadow-hover ring-2 ring-primary/20"
+      )}
+      onClick={selectable ? onSelect : undefined}
+    >
+      <div className="flex items-start gap-4">
+        <div className={cn(
+          "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors",
+          selected ? "bg-gradient-primary text-primary-foreground" : "bg-accent text-primary"
+        )}>
+          <Icon className="w-6 h-6" />
         </div>
-
-        <div className="space-y-2">
-          <h3 className="text-xl font-bold">{title}</h3>
-          <p className="text-muted-foreground">{description}</p>
+        <div className="space-y-1">
+          <h3 className="font-semibold text-card-foreground">{name}</h3>
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
-
-        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <Clock className="w-4 h-4" />
-            <span>{duration}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4" />
-            <span>{students}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Award className="w-4 h-4" />
-            <span>{level}</span>
-          </div>
-        </div>
-
-        <Button className="w-full bg-gradient-primary hover:opacity-90 transition-opacity">
-          Enroll Now
-        </Button>
       </div>
+      {selectable && selected && (
+        <div className="mt-3 text-xs font-medium text-primary">✓ Selected</div>
+      )}
     </Card>
   );
 };
