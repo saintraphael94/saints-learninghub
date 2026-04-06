@@ -14,16 +14,147 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      courses: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon: string
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      enrollments: {
+        Row: {
+          achievement_goal: string | null
+          city: string | null
+          cohort_start_date: string | null
+          communication_channel: string
+          consent_requirements: boolean
+          consent_updates: boolean
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          has_laptop: boolean
+          id: string
+          internet_strength: string
+          learning_mode: string
+          occupation: string | null
+          payment_method: string | null
+          payment_status: string
+          phone: string
+          primary_goal: string
+          prior_experience: string | null
+          proof_of_payment_url: string | null
+          referral_source: string | null
+          selected_courses: string[]
+          skill_level: string
+          software_access: string[] | null
+        }
+        Insert: {
+          achievement_goal?: string | null
+          city?: string | null
+          cohort_start_date?: string | null
+          communication_channel: string
+          consent_requirements?: boolean
+          consent_updates?: boolean
+          country: string
+          created_at?: string
+          email: string
+          full_name: string
+          has_laptop?: boolean
+          id?: string
+          internet_strength: string
+          learning_mode: string
+          occupation?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          phone: string
+          primary_goal: string
+          prior_experience?: string | null
+          proof_of_payment_url?: string | null
+          referral_source?: string | null
+          selected_courses: string[]
+          skill_level: string
+          software_access?: string[] | null
+        }
+        Update: {
+          achievement_goal?: string | null
+          city?: string | null
+          cohort_start_date?: string | null
+          communication_channel?: string
+          consent_requirements?: boolean
+          consent_updates?: boolean
+          country?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          has_laptop?: boolean
+          id?: string
+          internet_strength?: string
+          learning_mode?: string
+          occupation?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          phone?: string
+          primary_goal?: string
+          prior_experience?: string | null
+          proof_of_payment_url?: string | null
+          referral_source?: string | null
+          selected_courses?: string[]
+          skill_level?: string
+          software_access?: string[] | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +281,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
