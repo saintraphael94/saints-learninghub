@@ -20,9 +20,10 @@ export const Hero = () => {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
-            Enroll in{" "}
+            Welcome to
+            <br />
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              High-Income Digital Skills
+              Saints Graphics Web
             </span>
           </h1>
 
