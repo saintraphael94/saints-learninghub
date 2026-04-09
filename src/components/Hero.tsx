@@ -57,7 +57,7 @@ export const Hero = () => {
               <div className="text-xs text-muted-foreground">Students Trained</div>
             </div>
             <div className="space-y-1">
-              <div className="text-2xl md:text-3xl font-bold text-secondary">5</div>
+              <div className="text-2xl md:text-3xl font-bold text-secondary">10+</div>
               <div className="text-xs text-muted-foreground">Expert Courses</div>
             </div>
             <div className="space-y-1">
