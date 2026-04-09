@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Presentation, Table, PenTool, Shapes, FileText, LucideIcon } from "lucide-react";
+import { Presentation, Table, PenTool, Shapes, FileText, Blocks, Code, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -8,6 +8,8 @@ const iconMap: Record<string, LucideIcon> = {
   "pen-tool": PenTool,
   shapes: Shapes,
   "file-text": FileText,
+  blocks: Blocks,
+  code: Code,
 };
 
 interface CourseCardProps {

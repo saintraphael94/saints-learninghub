@@ -56,6 +56,8 @@ export const COURSES = [
   { name: "Vector Graphics with Adobe Illustrator", icon: "pen-tool" },
   { name: "Vector Graphics with CorelDRAW", icon: "shapes" },
   { name: "Content Authoring with Microsoft Word", icon: "file-text" },
+  { name: "Scratch Programming", icon: "blocks" },
+  { name: "Data Analysis with Python", icon: "code" },
 ];
 
 export const COUNTRIES = [
