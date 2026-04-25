@@ -73,7 +73,7 @@ export const Contact = () => {
               </div>
               <div>
                 <h3 className="font-semibold mb-1">Call Us</h3>
-                <p className="text-muted-foreground">+234 (0) 123 456 7890</p>
+                <p className="text-muted-foreground">+234 (0) 9077201874</p>
               </div>
             </Card>
 
@@ -83,7 +83,7 @@ export const Contact = () => {
               </div>
               <div>
                 <h3 className="font-semibold mb-1">Visit Us</h3>
-                <p className="text-muted-foreground">123 Tech Street, Lagos, Nigeria</p>
+                <p className="text-muted-foreground">CMBU Road, Barnawa GRA, Kaduna-Nigeria</p>
               </div>
             </Card>
 
