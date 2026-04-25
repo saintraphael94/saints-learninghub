@@ -53,7 +53,7 @@ export const Hero = () => {
 
           <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto pt-8">
             <div className="space-y-1">
-              <div className="text-2xl md:text-3xl font-bold text-primary">500+</div>
+              <div className="text-2xl md:text-3xl font-bold text-primary">200+</div>
               <div className="text-xs text-muted-foreground">Students Trained</div>
             </div>
             <div className="space-y-1">
