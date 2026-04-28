@@ -62,6 +62,7 @@ export const COURSES = [
   { name: "Intermediate Excel (Functions and Data Handling)", icon: "table" },
   { name: "Advanced Excel (Automation and Dashboards)", icon: "table" },
   { name: "AI and Future Skills", icon: "code" },
+  { name: "Vibe Coding", icon: "code" },
 ];
 
 export const COUNTRIES = [
