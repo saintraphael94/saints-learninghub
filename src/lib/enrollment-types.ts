@@ -58,6 +58,10 @@ export const COURSES = [
   { name: "Content Authoring with Microsoft Word", icon: "file-text" },
   { name: "Scratch Programming", icon: "blocks" },
   { name: "Data Analysis with Python", icon: "code" },
+  { name: "Excel for Beginners (Foundations)", icon: "table" },
+  { name: "Intermediate Excel (Functions and Data Handling)", icon: "table" },
+  { name: "Advanced Excel (Automation and Dashboards)", icon: "table" },
+  { name: "AI and Future Skills", icon: "code" },
 ];
 
 export const COUNTRIES = [
