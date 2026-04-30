@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, Facebook } from "lucide-react";
 import { toast } from "sonner";
 
 export const Contact = () => {
@@ -79,11 +79,18 @@ export const Contact = () => {
 
             <Card className="p-6 flex items-start gap-4 hover:shadow-card transition-shadow">
               <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-6 h-6 text-primary-foreground" />
+                <Facebook className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="font-semibold mb-1">Visit Us</h3>
-                <p className="text-muted-foreground">CMBU Road, Barnawa GRA, Kaduna-Nigeria</p>
+                <h3 className="font-semibold mb-1">Find us on Facebook</h3>
+                <a
+                  href="https://facebook.com/saintsgraphicsweb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  Saints Graphics Web
+                </a>
               </div>
             </Card>
 
