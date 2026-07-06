@@ -23,7 +23,7 @@ export const Hero = () => {
             Welcome to
             <br />
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              Saints Graphics Web
+              Saints Innovation Hub
             </span>
           </h1>
 
