@@ -84,12 +84,12 @@ export const Contact = () => {
               <div>
                 <h3 className="font-semibold mb-1">Find us on Facebook</h3>
                 <a
-                  href="https://facebook.com/saintsgraphicsweb"
+                  href="https://facebook.com/saintsinnovationhub"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  Saints Graphics Web
+                  Saints Innovation Hub
                 </a>
               </div>
             </Card>
