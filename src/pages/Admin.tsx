@@ -27,6 +27,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +36,21 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    if (!session) return;
-    fetchEnrollments();
+    if (!session) {
+      setIsAdmin(null);
+      return;
+    }
+    (async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      const admin = !!data;
+      setIsAdmin(admin);
+      if (admin) fetchEnrollments();
+    })();
   }, [session]);
 
   const fetchEnrollments = async () => {
@@ -84,6 +98,32 @@ const Admin = () => {
         <Navigation />
         <div className="pt-24 pb-16 container mx-auto px-4 max-w-md">
           <AdminLogin onLogin={() => supabase.auth.getSession().then(({ data }) => setSession(data.session))} />
+        </div>
+      </div>
+    );
+  }
+
+  if (isAdmin === null) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="pt-24 pb-16 container mx-auto px-4 text-center text-muted-foreground">
+          Verifying access...
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <div className="pt-24 pb-16 container mx-auto px-4 max-w-md text-center space-y-4">
+          <h1 className="text-2xl font-bold">Access denied</h1>
+          <p className="text-muted-foreground">Your account does not have admin privileges.</p>
+          <Button variant="outline" onClick={() => { supabase.auth.signOut(); setSession(null); }}>
+            Sign Out
+          </Button>
         </div>
       </div>
     );
