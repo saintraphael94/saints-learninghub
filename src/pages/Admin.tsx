@@ -27,6 +27,7 @@ const Admin = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [session, setSession] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +36,21 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    if (!session) return;
-    fetchEnrollments();
+    if (!session) {
+      setIsAdmin(null);
+      return;
+    }
+    (async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      const admin = !!data;
+      setIsAdmin(admin);
+      if (admin) fetchEnrollments();
+    })();
   }, [session]);
 
   const fetchEnrollments = async () => {
