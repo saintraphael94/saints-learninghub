@@ -1,14 +1,30 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Facebook } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [form, setForm] = useState({ name: "", email: "", course: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! We'll get back to you soon.");
+    setSubmitting(true);
+    try {
+      const { error } = await supabase.functions.invoke("send-contact-email", { body: form });
+      if (error) throw error;
+      toast.success("Thank you! Your message has been sent.");
+      setForm({ name: "", email: "", course: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Could not send message. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -28,33 +44,56 @@ export const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Full Name</label>
-                <Input placeholder="John Doe" required />
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Email Address</label>
-                <Input type="email" placeholder="john@example.com" required />
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Course of Interest</label>
-                <Input placeholder="e.g., Web Development" required />
-              </div>
-              
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Message</label>
-                <Textarea 
-                  placeholder="Tell us about your goals and interests..." 
-                  className="min-h-[120px]"
-                  required 
+                <Input
+                  placeholder="John Doe"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
                 />
               </div>
 
-              <Button type="submit" className="w-full bg-gradient-primary hover:opacity-90 transition-opacity">
-                Send Message
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Email Address</label>
+                <Input
+                  type="email"
+                  placeholder="john@example.com"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Course of Interest</label>
+                <Input
+                  placeholder="e.g., Web Development"
+                  required
+                  value={form.course}
+                  onChange={(e) => setForm({ ...form, course: e.target.value })}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Message</label>
+                <Textarea
+                  placeholder="Tell us about your goals and interests..."
+                  className="min-h-[120px]"
+                  required
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                />
+              </div>
+
+              <Button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
+              >
+                {submitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </Card>
+
 
           <div className="space-y-6">
             <Card className="p-6 flex items-start gap-4 hover:shadow-card transition-shadow">
