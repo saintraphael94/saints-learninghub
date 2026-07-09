@@ -2,7 +2,7 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 import { z } from 'npm:zod@3.23.8';
 
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
-const TO_EMAIL = 'raphael.datalab@gmail.com';
+const TO_EMAIL = 'olayemi.raphael@gmail.com';
 
 const BodySchema = z.object({
   name: z.string().trim().min(1).max(100),
