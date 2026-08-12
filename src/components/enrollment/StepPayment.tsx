@@ -21,12 +21,17 @@ export const StepPayment = ({ data, update }: Props) => {
     if (!file) return;
     setUploading(true);
     try {
+      const { data: authData } = await supabase.auth.getUser();
+      const userId = authData.user?.id;
+      if (!userId) {
+        toast.error("Please sign in to upload proof of payment");
+        return;
+      }
       const ext = file.name.split(".").pop();
-      const path = `${crypto.randomUUID()}.${ext}`;
+      const path = `${userId}/${crypto.randomUUID()}.${ext}`;
       const { error } = await supabase.storage.from("payment-proofs").upload(path, file);
       if (error) throw error;
-      const { data: urlData } = supabase.storage.from("payment-proofs").getPublicUrl(path);
-      update({ proofOfPaymentUrl: urlData.publicUrl });
+      update({ proofOfPaymentUrl: path });
       toast.success("File uploaded successfully");
     } catch {
       toast.error("Upload failed");
